@@ -11,7 +11,7 @@ struct TextRes {
 
 #[post("/speak", format="json", data="<value>")]
 fn speak(value: Json<TextRes>) -> String {
-    std::process::Command::new("say").args(&[format!("\"{}\"", &value.text)]).output().expect("erroring");
+    std::process::Command::new("say").args(&[format!("\"{}\"", &value.text.replace("\"", ""))]).output().expect("erroring");
     format!("hello")
 }
 
